@@ -1,10 +1,10 @@
 # The maintainer reviews all changes, especially executable build/release code.
-* @bababebr
-/.github/ @bababebr
-/pom.xml @bababebr
-/**/pom.xml @bababebr
-/.mvn/ @bababebr
-/mvnw* @bababebr
-/LICENSE @bababebr
-/NOTICE @bababebr
-/core/src/main/openapi/ @bababebr
+* @max4j/maintainers
+/.github/ @max4j/maintainers
+/pom.xml @max4j/maintainers
+/**/pom.xml @max4j/maintainers
+/.mvn/ @max4j/maintainers
+/mvnw* @max4j/maintainers
+/LICENSE @max4j/maintainers
+/NOTICE @max4j/maintainers
+/core/src/main/openapi/ @max4j/maintainers

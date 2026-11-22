@@ -1,13 +1,13 @@
-package io.bittersweet.max.springboot;
+package io.max4j.springboot;
 
-import io.bittersweet.max.core.MaxClient;
-import io.bittersweet.max.core.api.BotsApi;
-import io.bittersweet.max.core.api.ChatsApi;
-import io.bittersweet.max.core.api.CommentsApi;
-import io.bittersweet.max.core.api.MessagesApi;
-import io.bittersweet.max.core.api.SubscriptionsApi;
-import io.bittersweet.max.core.api.UploadApi;
-import io.bittersweet.max.core.client.generated.ApiClient;
+import io.max4j.core.MaxClient;
+import io.max4j.core.api.BotsApi;
+import io.max4j.core.api.ChatsApi;
+import io.max4j.core.api.CommentsApi;
+import io.max4j.core.api.MessagesApi;
+import io.max4j.core.api.SubscriptionsApi;
+import io.max4j.core.api.UploadApi;
+import io.max4j.core.client.generated.ApiClient;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

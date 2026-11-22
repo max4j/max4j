@@ -5,9 +5,9 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>io.github.bababebr.max4j</groupId>
+    <groupId>io.max4j</groupId>
     <artifactId>max4j-parent</artifactId>
-    <version>0.1.1</version>
+    <version>0.2.0</version>
   </parent>
 
   <artifactId>core</artifactId>
@@ -54,9 +54,9 @@
               <inputSpec>${project.basedir}/src/main/openapi/max-api.yaml</inputSpec>
               <generatorName>java</generatorName>
               <library>native</library>
-              <apiPackage>io.bittersweet.max.core.api</apiPackage>
-              <modelPackage>io.bittersweet.max.core.model</modelPackage>
-              <invokerPackage>io.bittersweet.max.core.client.generated</invokerPackage>
+              <apiPackage>io.max4j.core.api</apiPackage>
+              <modelPackage>io.max4j.core.model</modelPackage>
+              <invokerPackage>io.max4j.core.client.generated</invokerPackage>
               <generateApiTests>false</generateApiTests>
               <generateModelTests>false</generateModelTests>
               <generateApiDocumentation>false</generateApiDocumentation>

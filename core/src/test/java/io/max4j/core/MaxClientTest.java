@@ -1,11 +1,11 @@
-package io.bittersweet.max.core;
+package io.max4j.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import io.bittersweet.max.core.model.BotStartedUpdate;
-import io.bittersweet.max.core.model.Update;
+import io.max4j.core.model.BotStartedUpdate;
+import io.max4j.core.model.Update;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpRequest;

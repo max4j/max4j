@@ -23,7 +23,7 @@ concurrency:
 
 jobs:
   validate:
-    if: github.ref == 'refs/heads/main' && github.repository == 'emp-ai/max4j'
+    if: github.ref == 'refs/heads/main' && github.repository == 'max4j/max4j'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     outputs:

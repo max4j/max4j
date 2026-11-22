@@ -1,6 +1,6 @@
-package io.bittersweet.max.springboot.webhook;
+package io.max4j.springboot.webhook;
 
-import io.bittersweet.max.springboot.Max4jProperties;
+import io.max4j.springboot.Max4jProperties;
 import java.util.List;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;

@@ -27,9 +27,9 @@ class ReleaseValidationTest(unittest.TestCase):
         return subprocess.check_output(['git', '-c', 'user.name=Synthetic Test', '-c', 'user.email=test@example.invalid',
             '-C', str(self.repo), *args], text=True, stderr=subprocess.PIPE).strip()
 
-    def write_poms(self, version, child_version=None):
+    def write_poms(self, version, child_version=None, group='io.max4j'):
         for path in release.POMS:
-            node = f'<version>{version}</version>' if path == 'pom.xml' else f'<parent><version>{child_version or version}</version></parent>'
+            node = f'<groupId>{group}</groupId><version>{version}</version>' if path == 'pom.xml' else f'<parent><groupId>{group}</groupId><version>{child_version or version}</version></parent>'
             p = self.repo / path
             p.parent.mkdir(parents=True, exist_ok=True)
             p.write_text(f'<project xmlns="http://maven.apache.org/POM/4.0.0">{node}</project>', encoding='utf-8')
@@ -70,6 +70,24 @@ class ReleaseValidationTest(unittest.TestCase):
     def test_rejects_missing_tag(self):
         with self.assertRaises(subprocess.CalledProcessError):
             release.validate(self.repo, 'v9.9.9', 'github')
+
+    def test_rejects_foreign_namespace(self):
+        self.write_poms('2.0.0', group='example.legacy')
+        self.commit()
+        self.git('update-ref', 'refs/remotes/origin/main', 'HEAD')
+        self.git('tag', 'v2.0.0')
+        with self.assertRaises(ValueError):
+            release.validate(self.repo, 'v2.0.0', 'central')
+
+    def test_rejects_child_namespace_override(self):
+        self.write_poms('2.0.0')
+        child = self.repo / 'core/pom.xml'
+        child.write_text(child.read_text().replace('</parent>', '</parent><groupId>example.other</groupId>'), encoding='utf-8')
+        self.commit()
+        self.git('update-ref', 'refs/remotes/origin/main', 'HEAD')
+        self.git('tag', 'v2.0.0')
+        with self.assertRaises(ValueError):
+            release.validate(self.repo, 'v2.0.0', 'central')
 
 
 if __name__ == '__main__':

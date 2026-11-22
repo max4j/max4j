@@ -1,6 +1,6 @@
 # max4j
 
-[![Build](https://github.com/emp-ai/max4j/actions/workflows/build.yml/badge.svg)](https://github.com/emp-ai/max4j/actions/workflows/build.yml)
+[![Build](https://github.com/max4j/max4j/actions/workflows/build.yml/badge.svg)](https://github.com/max4j/max4j/actions/workflows/build.yml)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
 Java 21 клиент для [MAX Bot API](https://dev.max.ru/docs-api), сгенерированный из официальной
@@ -9,7 +9,8 @@ Java 21 клиент для [MAX Bot API](https://dev.max.ru/docs-api), сген
 Независимый проект под Apache-2.0. [Участие в разработке](CONTRIBUTING.md) ·
 [Сообщить об уязвимости](SECURITY.md).
 
-Maven-координаты: **`io.github.bababebr.max4j`**. Зависимости подключаются из Maven Central.
+Maven-координаты: **`io.max4j`**. Актуальная версия — **`0.2.0`**.
+Сборка из исходников: `./mvnw install`.
 
 ## Модули
 
@@ -29,15 +30,15 @@ Maven-координаты: **`io.github.bababebr.max4j`**. Зависимост
 
 ```xml
 <dependency>
-  <groupId>io.github.bababebr.max4j</groupId>
+  <groupId>io.max4j</groupId>
   <artifactId>core</artifactId>
-  <version>0.1.1</version>
+  <version>0.2.0</version>
 </dependency>
 ```
 
 ```java
-import io.bittersweet.max.core.MaxClient;
-import io.bittersweet.max.core.model.BotInfo;
+import io.max4j.core.MaxClient;
+import io.max4j.core.model.BotInfo;
 
 MaxClient max = MaxClient.create(System.getenv("MAX_BOT_TOKEN"));
 BotInfo me = max.bots().getMyInfo();
@@ -52,9 +53,9 @@ System.out.println(me.getUsername());
 
 ```xml
 <dependency>
-  <groupId>io.github.bababebr.max4j</groupId>
+  <groupId>io.max4j</groupId>
   <artifactId>spring-boot-3-starter</artifactId>
-  <version>0.1.1</version>
+  <version>0.2.0</version>
 </dependency>
 ```
 
@@ -94,7 +95,7 @@ max4j:
 ```
 
 ```java
-import io.bittersweet.max.springboot.webhook.MaxUpdateHandler;
+import io.max4j.springboot.webhook.MaxUpdateHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -113,8 +114,8 @@ class MaxBotConfiguration {
 подписку в MAX с тем же секретом:
 
 ```java
-import io.bittersweet.max.core.model.SubscriptionRequestBody;
-import io.bittersweet.max.core.api.SubscriptionsApi;
+import io.max4j.core.model.SubscriptionRequestBody;
+import io.max4j.core.api.SubscriptionsApi;
 
 subscriptionsApi.subscribe(new SubscriptionRequestBody()
     .url("https://example.org/max/webhook")
@@ -147,10 +148,18 @@ Workflow подписывает артефакты, публикует их в M
 доступен на keyserver. Локальный `-Pcentral-release deploy` по умолчанию только загружает
 пакет для проверки в Portal; публикацию подтверждают отдельно.
 
-## Переход со старых координат
+## Переход на 0.2.0
 
-Замените Maven `groupId` `io.bittersweet.max`
-на `io.github.bababebr.max4j` у зависимостей max4j. `artifactId` модулей сохраняются.
-Java-пакеты `io.bittersweet.max.*` и настройки `max4j.*` сохраняются, поэтому импорты
-и конфигурацию приложения переименовывать не нужно. Не подключайте одновременно
-старые и новые координаты: они содержат одинаковые Java-классы.
+Проект развивается в организации [max4j](https://github.com/max4j).
+Начиная с 0.2.0, Maven `groupId` всех модулей — `io.max4j`,
+Java-пакеты — `io.max4j.core.*` и `io.max4j.springboot.*`.
+
+Обновите `groupId` и версию зависимостей, замените прежний префикс Java-пакетов
+на `io.max4j` во всех импортах и настройках сканирования компонентов, затем
+пересоберите приложение. `artifactId` модулей и свойства `max4j.*` сохранены.
+Это изменение несовместимо на уровне Java-пакетов; не смешивайте модули разных версий.
+Ранее опубликованные версии остаются доступными по прежним координатам.
+
+Для публикации требуется подтверждённый namespace `io.max4j` в Sonatype Central
+Portal. Владение доменом `max4j.io` подтверждается DNS TXT-записью из Portal.
+Само переименование репозитория не меняет Maven-координаты уже выпущенных версий.

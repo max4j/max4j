@@ -1,13 +1,13 @@
-package io.bittersweet.max.core;
+package io.max4j.core;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.bittersweet.max.core.api.BotsApi;
-import io.bittersweet.max.core.api.ChatsApi;
-import io.bittersweet.max.core.api.CommentsApi;
-import io.bittersweet.max.core.api.MessagesApi;
-import io.bittersweet.max.core.api.SubscriptionsApi;
-import io.bittersweet.max.core.api.UploadApi;
-import io.bittersweet.max.core.client.generated.ApiClient;
+import io.max4j.core.api.BotsApi;
+import io.max4j.core.api.ChatsApi;
+import io.max4j.core.api.CommentsApi;
+import io.max4j.core.api.MessagesApi;
+import io.max4j.core.api.SubscriptionsApi;
+import io.max4j.core.api.UploadApi;
+import io.max4j.core.client.generated.ApiClient;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.time.Duration;
