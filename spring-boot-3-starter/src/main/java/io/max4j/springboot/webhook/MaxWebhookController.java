@@ -1,6 +1,6 @@
-package io.bittersweet.max.springboot.webhook;
+package io.max4j.springboot.webhook;
 
-import io.bittersweet.max.core.model.Update;
+import io.max4j.core.model.Update;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.List;

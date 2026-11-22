@@ -34,6 +34,10 @@ def validate(repo, tag, registry):
         own = pom.findtext('m:version', namespaces=NS)
         if actual != version or (own is not None and own != version):
             raise ValueError('All tagged POM versions must match the stable release tag')
+        group = pom.findtext('m:groupId' if path == 'pom.xml' else 'm:parent/m:groupId', namespaces=NS)
+        own_group = pom.findtext('m:groupId', namespaces=NS)
+        if group != 'io.max4j' or (own_group is not None and own_group != 'io.max4j'):
+            raise ValueError('All release modules must use the io.max4j namespace')
     return sha
 
 
@@ -42,7 +46,7 @@ def main():
         sha = validate(Path.cwd(), os.environ.get('RELEASE_TAG', ''), os.environ.get('RELEASE_REGISTRY', ''))
     except (ValueError, subprocess.CalledProcessError, ET.ParseError):
         # Do not echo untrusted input into workflow commands/annotations.
-        print('Release rejected: use an existing vX.Y.Z tag on main with matching non-SNAPSHOT POM versions.', file=sys.stderr)
+        print('Release rejected: use an existing vX.Y.Z tag on main with matching non-SNAPSHOT versions and the io.max4j namespace.', file=sys.stderr)
         return 1
     output = os.environ.get('GITHUB_OUTPUT')
     if output:

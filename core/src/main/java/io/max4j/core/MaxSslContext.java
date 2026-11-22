@@ -1,4 +1,4 @@
-package io.bittersweet.max.core;
+package io.max4j.core;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,8 +20,8 @@ import javax.net.ssl.X509TrustManager;
 final class MaxSslContext {
 
   private static final List<String> MAX_CA_RESOURCES = List.of(
-      "/io/bittersweet/max/core/certificates/russian_trusted_root_ca_pem.crt",
-      "/io/bittersweet/max/core/certificates/russian_trusted_sub_ca_2024_pem.crt");
+      "/io/max4j/core/certificates/russian_trusted_root_ca_pem.crt",
+      "/io/max4j/core/certificates/russian_trusted_sub_ca_2024_pem.crt");
 
   private MaxSslContext() {
   }

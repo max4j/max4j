@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>io.github.bababebr.max4j</groupId>
+  <groupId>io.max4j</groupId>
   <artifactId>max4j-parent</artifactId>
-  <version>0.1.1</version>
+  <version>0.2.0</version>
   <packaging>pom</packaging>
 
   <name>max4j</name>
   <description>Java integration for the MAX Bot API</description>
-  <url>https://github.com/emp-ai/max4j</url>
+  <url>https://github.com/max4j/max4j</url>
 
   <licenses>
     <license>
@@ -22,15 +22,15 @@
   </licenses>
   <developers>
     <developer>
-      <id>emp-ai</id>
+      <id>max4j</id>
       <name>max4j contributors</name>
-      <url>https://github.com/emp-ai/max4j/graphs/contributors</url>
+      <url>https://github.com/max4j/max4j/graphs/contributors</url>
     </developer>
   </developers>
   <scm>
-    <connection>scm:git:https://github.com/emp-ai/max4j.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/emp-ai/max4j.git</developerConnection>
-    <url>https://github.com/emp-ai/max4j</url>
+    <connection>scm:git:https://github.com/max4j/max4j.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/max4j/max4j.git</developerConnection>
+    <url>https://github.com/max4j/max4j</url>
     <tag>HEAD</tag>
   </scm>
 
@@ -61,7 +61,7 @@
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>io.github.bababebr.max4j</groupId>
+        <groupId>io.max4j</groupId>
         <artifactId>core</artifactId>
         <version>${project.version}</version>
       </dependency>
@@ -104,7 +104,7 @@
     <repository>
       <id>github</id>
       <name>GitHub Packages</name>
-      <url>https://maven.pkg.github.com/emp-ai/max4j</url>
+      <url>https://maven.pkg.github.com/max4j/max4j</url>
     </repository>
   </distributionManagement>
 

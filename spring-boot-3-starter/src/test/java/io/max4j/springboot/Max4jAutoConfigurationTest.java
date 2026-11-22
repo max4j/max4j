@@ -1,18 +1,20 @@
-package io.bittersweet.max.springboot;
+package io.max4j.springboot;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import io.bittersweet.max.core.MaxClient;
-import io.bittersweet.max.core.api.BotsApi;
-import io.bittersweet.max.core.api.ChatsApi;
-import io.bittersweet.max.core.api.CommentsApi;
-import io.bittersweet.max.core.api.MessagesApi;
-import io.bittersweet.max.core.api.SubscriptionsApi;
-import io.bittersweet.max.core.api.UploadApi;
-import io.bittersweet.max.core.client.generated.ApiClient;
+import io.max4j.core.MaxClient;
+import io.max4j.core.api.BotsApi;
+import io.max4j.core.api.ChatsApi;
+import io.max4j.core.api.CommentsApi;
+import io.max4j.core.api.MessagesApi;
+import io.max4j.core.api.SubscriptionsApi;
+import io.max4j.core.api.UploadApi;
+import io.max4j.core.client.generated.ApiClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
+import org.springframework.context.annotation.Configuration;
 
 class Max4jAutoConfigurationTest {
 
@@ -45,5 +47,22 @@ class Max4jAutoConfigurationTest {
     contextRunner
         .withPropertyValues("max4j.enabled=true")
         .run(context -> assertThat(context).hasFailed());
+  }
+
+  @Test
+  void discoversClientThroughStarterMetadata() {
+    new ApplicationContextRunner()
+        .withUserConfiguration(AutoConfiguredApplication.class)
+        .withPropertyValues("max4j.enabled=true", "max4j.token=test-token")
+        .run(context -> {
+          assertThat(context).hasNotFailed();
+          assertThat(context).hasSingleBean(MaxClient.class);
+          assertThat(context).hasSingleBean(BotsApi.class);
+        });
+  }
+
+  @Configuration(proxyBeanMethods = false)
+  @EnableAutoConfiguration
+  static class AutoConfiguredApplication {
   }
 }

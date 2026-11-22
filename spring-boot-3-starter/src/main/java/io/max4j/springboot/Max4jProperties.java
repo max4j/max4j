@@ -1,4 +1,4 @@
-package io.bittersweet.max.springboot;
+package io.max4j.springboot;
 
 import java.net.URI;
 import java.time.Duration;

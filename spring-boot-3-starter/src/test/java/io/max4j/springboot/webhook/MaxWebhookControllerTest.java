@@ -1,11 +1,11 @@
-package io.bittersweet.max.springboot.webhook;
+package io.max4j.springboot.webhook;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import io.bittersweet.max.core.model.Update;
+import io.max4j.core.model.Update;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.web.server.ResponseStatusException;
