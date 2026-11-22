@@ -1,0 +1,67 @@
+name: Publish Maven relocation
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_tag:
+        description: Historical release tag before the namespace migration
+        type: string
+        required: true
+      target_tag:
+        description: Already published io.max4j release tag
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: central-relocation-${{ inputs.target_tag }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    if: github.ref == 'refs/heads/main' && github.repository == 'max4j/max4j'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - run: python3 -m unittest discover -s .github/scripts/tests -v
+      - name: Check tags and public Central coordinates
+        env:
+          SOURCE_TAG: ${{ inputs.source_tag }}
+          TARGET_TAG: ${{ inputs.target_tag }}
+        run: python3 .github/scripts/prepare_relocation.py
+
+  publish:
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: release
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
+        with:
+          distribution: temurin
+          java-version: "21"
+          server-id: central
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+      - name: Recheck publication preconditions
+        env:
+          SOURCE_TAG: ${{ inputs.source_tag }}
+          TARGET_TAG: ${{ inputs.target_tag }}
+        run: python3 .github/scripts/prepare_relocation.py
+      - name: Publish signed POM-only relocation
+        run: ./mvnw --batch-mode --no-transfer-progress -f target/relocation/pom.xml -Pcentral-release -Dcentral.autoPublish=true -Dcentral.waitUntil=published deploy
+        env:
+          MAVEN_USERNAME: ${{ secrets.CENTRAL_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.CENTRAL_PASSWORD }}
+          MAVEN_GPG_KEY: ${{ secrets.MAVEN_GPG_KEY }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
