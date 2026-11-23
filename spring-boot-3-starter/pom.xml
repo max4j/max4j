@@ -7,12 +7,28 @@
   <parent>
     <groupId>io.max4j</groupId>
     <artifactId>max4j-parent</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
   </parent>
+
+  <properties>
+    <spring-boot.version>3.5.14</spring-boot.version>
+  </properties>
 
   <artifactId>spring-boot-3-starter</artifactId>
   <name>max4j Spring Boot 3 starter</name>
   <description>Spring Boot 3 auto-configuration for MAX Bot API</description>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <dependency>

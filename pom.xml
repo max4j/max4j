@@ -6,7 +6,7 @@
 
   <groupId>io.max4j</groupId>
   <artifactId>max4j-parent</artifactId>
-  <version>0.2.0</version>
+  <version>0.3.0</version>
   <packaging>pom</packaging>
 
   <name>max4j</name>
@@ -37,13 +37,13 @@
   <modules>
     <module>core</module>
     <module>spring-boot-3-starter</module>
+    <module>spring-boot-4-starter</module>
   </modules>
 
   <properties>
     <java.version>21</java.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <spring-boot.version>3.5.4</spring-boot.version>
     <openapi-generator.version>7.25.0</openapi-generator.version>
     <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
@@ -53,13 +53,6 @@
 
   <dependencyManagement>
     <dependencies>
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-dependencies</artifactId>
-        <version>${spring-boot.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
       <dependency>
         <groupId>io.max4j</groupId>
         <artifactId>core</artifactId>
