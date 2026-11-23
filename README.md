@@ -9,7 +9,7 @@ Java 21 клиент для [MAX Bot API](https://dev.max.ru/docs-api), сген
 Независимый проект под Apache-2.0. [Участие в разработке](CONTRIBUTING.md) ·
 [Сообщить об уязвимости](SECURITY.md).
 
-Maven-координаты: **`io.max4j`**. Актуальная версия — **`0.4.0`**.
+Maven-координаты: **`io.max4j`**. Актуальная версия — **`0.4.1`**.
 Сборка из исходников: `./mvnw install`.
 
 ## Модули
@@ -26,7 +26,7 @@ Maven-координаты: **`io.max4j`**. Актуальная версия �
 <dependency>
   <groupId>io.max4j</groupId>
   <artifactId>core</artifactId>
-  <version>0.4.0</version>
+  <version>0.4.1</version>
 </dependency>
 ```
 
@@ -49,7 +49,7 @@ System.out.println(me.getUsername());
 <dependency>
   <groupId>io.max4j</groupId>
   <artifactId>spring-boot-3-starter</artifactId>
-  <version>0.4.0</version>
+  <version>0.4.1</version>
 </dependency>
 ```
 
