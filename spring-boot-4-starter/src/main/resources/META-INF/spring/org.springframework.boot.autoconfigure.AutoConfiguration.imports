@@ -1,0 +1,2 @@
+io.max4j.springboot.Max4jAutoConfiguration
+io.max4j.springboot.webhook.Max4jWebhookAutoConfiguration
