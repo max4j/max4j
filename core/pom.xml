@@ -7,7 +7,7 @@
   <parent>
     <groupId>io.max4j</groupId>
     <artifactId>max4j-parent</artifactId>
-    <version>0.4.0</version>
+    <version>0.4.1</version>
   </parent>
 
   <properties>
