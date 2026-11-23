@@ -7,8 +7,14 @@
   <parent>
     <groupId>io.max4j</groupId>
     <artifactId>max4j-parent</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
   </parent>
+
+  <properties>
+    <jackson.version>2.23.0</jackson.version>
+    <junit.version>5.14.4</junit.version>
+    <jakarta.annotation.version>3.0.0</jakarta.annotation.version>
+  </properties>
 
   <artifactId>core</artifactId>
   <name>max4j core</name>
@@ -18,22 +24,27 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-core</artifactId>
+      <version>${jackson.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
+      <version>${jackson.version}</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
+      <version>${jackson.version}</version>
     </dependency>
     <dependency>
       <groupId>jakarta.annotation</groupId>
       <artifactId>jakarta.annotation-api</artifactId>
+      <version>${jakarta.annotation.version}</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

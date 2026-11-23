@@ -9,22 +9,16 @@ Java 21 клиент для [MAX Bot API](https://dev.max.ru/docs-api), сген
 Независимый проект под Apache-2.0. [Участие в разработке](CONTRIBUTING.md) ·
 [Сообщить об уязвимости](SECURITY.md).
 
-Maven-координаты: **`io.max4j`**. Актуальная версия — **`0.2.0`**.
+Maven-координаты: **`io.max4j`**. Актуальная версия — **`0.3.0`**.
 Сборка из исходников: `./mvnw install`.
 
 ## Модули
 
 - `core` — модели, API-классы и HTTP-клиент без зависимости от Spring;
-- `spring-boot-3-starter` — автоконфигурация клиента и опциональный webhook-контроллер.
+- `spring-boot-3-starter`, `spring-boot-4-starter` — автоконфигурация клиента и опциональный webhook-контроллер.
 
-В репозитории зафиксирована схема MAX Bot API версии `0.0.33`. Java-код API и моделей
+В репозитории зафиксирована схема MAX Bot API версии `0.0.34`. Java-код API и моделей
 генерируется во время сборки с помощью OpenAPI Generator.
-
-## Требования
-
-- Java 21;
-- Maven 3.9+ или Maven Wrapper из репозитория;
-- токен бота из MAX для реальных запросов.
 
 ## Core
 
@@ -32,7 +26,7 @@ Maven-координаты: **`io.max4j`**. Актуальная версия �
 <dependency>
   <groupId>io.max4j</groupId>
   <artifactId>core</artifactId>
-  <version>0.2.0</version>
+  <version>0.3.0</version>
 </dependency>
 ```
 
@@ -55,7 +49,7 @@ System.out.println(me.getUsername());
 <dependency>
   <groupId>io.max4j</groupId>
   <artifactId>spring-boot-3-starter</artifactId>
-  <version>0.2.0</version>
+  <version>0.3.0</version>
 </dependency>
 ```
 
@@ -125,53 +119,3 @@ subscriptionsApi.subscribe(new SubscriptionRequestBody()
 MAX рекомендует webhook для production. Long polling остаётся доступен через
 `SubscriptionsApi#getUpdates` для разработки и тестов. Webhook и long polling нельзя
 использовать одновременно.
-
-## Обновление схемы
-
-Замените `core/src/main/openapi/max-api.yaml` актуальным файлом из официального репозитория и
-запустите `mvnw verify`. Сгенерированные исходники находятся в `core/target` и не коммитятся.
-
-## Сборка и релиз
-
-```bash
-./mvnw --batch-mode verify
-```
-
-В Windows используйте `mvnw.cmd`. Для релиза обновите версии во всех POM, отправьте тег
-`vX.Y.Z` на проверенный коммит `main` и запустите **Actions → Publish Maven package**
-с этим тегом и реестром `central`. Подтвердите окружение `release` в **Review deployments**.
-Workflow подписывает артефакты, публикует их в Maven Central и ждёт окончания публикации.
-
-В секретах окружения `release` нужны `CENTRAL_USERNAME`, `CENTRAL_PASSWORD`
-из [токена Portal](https://central.sonatype.com/usertoken), а также `MAVEN_GPG_KEY`
-(экспорт закрытого ключа в ASCII armor) и `MAVEN_GPG_PASSPHRASE`. Открытый ключ должен быть
-доступен на keyserver. Локальный `-Pcentral-release deploy` по умолчанию только загружает
-пакет для проверки в Portal; публикацию подтверждают отдельно.
-
-## Переход на 0.2.0
-
-Проект развивается в организации [max4j](https://github.com/max4j).
-Начиная с 0.2.0, Maven `groupId` всех модулей — `io.max4j`,
-Java-пакеты — `io.max4j.core.*` и `io.max4j.springboot.*`.
-
-Обновите `groupId` и версию зависимостей, замените прежний префикс Java-пакетов
-на `io.max4j` во всех импортах и настройках сканирования компонентов, затем
-пересоберите приложение. `artifactId` модулей и свойства `max4j.*` сохранены.
-
-Для старых Maven-координат предусмотрена одноразовая публикация relocation POM
-версии 0.2.0. Maven перенаправляет разрешение зависимостей на `io.max4j` и выводит
-предупреждение о переносе. Java-импорты и координаты родительского POM нужно
-обновить вручную. Это не возвращает совместимость со старым Java namespace.
-Уже опубликованные старые версии остаются неизменными; пометка на сторонних
-каталогах появится после обновления их индекса.
-
-Workflow `Publish Maven relocation` принимает исторический и целевой release-теги.
-Он использует namespace из истории Git, проверяет наличие целевого релиза в
-Central и запрещает перезапись существующих координат. После проверки в защищённом
-окружении `release` подписываются и публикуются только POM, без копий JAR.
-Это изменение несовместимо на уровне Java-пакетов; не смешивайте модули разных версий.
-Ранее опубликованные версии остаются доступными по прежним координатам.
-
-Для публикации требуется подтверждённый namespace `io.max4j` в Sonatype Central
-Portal. Владение доменом `max4j.io` подтверждается DNS TXT-записью из Portal.
-Само переименование репозитория не меняет Maven-координаты уже выпущенных версий.
